@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import * as AWS from 'node_modules/aws-sdk';
+import { config, DynamoDB }  from 'node_modules/aws-sdk';
 import { selectAws } from '../Ngrx/reducers';
 
 
@@ -25,24 +25,24 @@ export class DataService {
 
 
 connect = (id:any,pw:any)=>{
-  const config = {
+  const myConfig = {
     accessKeyId: id, // hardcoding credentials is a bad practice
     secretAccessKey: pw,
     region: "us-east-2"
 }
 
 
-  AWS.config.update(config);
+  config.update(myConfig);
 
-    AWS.config.getCredentials(function(err) {
+    config.getCredentials(function(err) {
       if (err) console.log(err.stack);
       // credentials not loaded
       else {
-        console.log("Access key:", AWS.config.credentials?.accessKeyId);
+        console.log("Access key:", config.credentials?.accessKeyId);
       }
     });
 
-    const dynamoDB = new AWS.DynamoDB.DocumentClient()
+    const dynamoDB = new DynamoDB.DocumentClient()
 /*  
    let test =  {
     TableName: "test",

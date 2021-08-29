@@ -1,2 +1,20 @@
 
-<button mat-raised-button (click)="test1()"> test1 </button>
+<!--<button mat-raised-button (click)="test1()"> test1 </button>-->
+
+
+<form [formGroup]="awsForm" (ngSubmit)="onSubmit()" novalidate>
+ 
+    <p>
+      <label for="id">Aws id</label>
+      <input type="text" id="id" name="id" formControlName="id">
+    </p>
+
+    <p>
+        <label for="secret">Password</label>
+        <input type="text" id="secret" name="secret" formControlName="secret">
+    </p>
+    <p>
+        <button type="submit" [disabled]="!awsForm.valid">Submit</button>
+    </p>
+</form>
+

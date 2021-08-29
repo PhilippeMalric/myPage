@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { premiereActions } from 'src/app/Ngrx/main-actions.actions';
+import { premiereActions, updateAwsActions } from 'src/app/Ngrx/main-actions.actions';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,17 +10,36 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./first.component.scss']
 })
 export class FirstComponent implements OnInit {
+  awsForm: FormGroup;
 
-  constructor(private dataService:DataService,private store:Store) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService:DataService,
+    private store:Store) { 
+
+    this.awsForm = this.formBuilder.group({
+      id: '',
+      secret: ''
+    });
+
+  }
 
   ngOnInit(): void {
   }
 
 
-test1(){
+  test1(){
 
-  this.store.dispatch(premiereActions())
+    this.store.dispatch(premiereActions())
 
-}
+  }
+
+  onSubmit(){
+    
+    console.log(this.awsForm)
+    this.store.dispatch(updateAwsActions({data:{aws_id:this.awsForm.value.id,aws_pw:this.awsForm.value.secret}}))
+
+  }
+
 
 }

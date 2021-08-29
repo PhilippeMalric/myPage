@@ -5,5 +5,8 @@ export const premiereActions = createAction(
 );
 
 
-
+export const updateAwsActions = createAction(
+  '[updateAwsActions] Load updateAwsActions',
+  props<{ data:{aws_id:string,aws_pw:string} }>()
+);
 

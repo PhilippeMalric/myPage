@@ -1,4 +1,5 @@
 import {
+  Action,
   ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
@@ -8,23 +9,38 @@ import {
   on
 } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-import { premiereActions } from '../main-actions.actions';
+import { premiereActions, updateAwsActions } from '../main-actions.actions';
 
 
-export interface State {
+export interface MainState {
+  aws:{
+    aws_id : string;
+    aws_pw : string
+  }
+ 
+}
+
+export const initialState = {
+aws:{
+  aws_id : "",
+  aws_pw : ""
+}
+
 
 }
 
-export const initialState = {}
-
-const myReducers = createReducer(
+const mainReducer = createReducer(
   initialState,
-  on(premiereActions,state => ({ ...state}))
+  on(premiereActions,state => ({ ...state})),
+  on(updateAwsActions,(state, { data }) => ({ ...state,aws:{aws_id:data.aws_id,aws_pw:data.aws_pw}}))
 )
 
-export const reducers: ActionReducerMap<State> = {
-  main:myReducers
-};
 
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+
+export function reducer(state: MainState | undefined, action: Action) {
+  return mainReducer(state, action);
+}
+
+export const selectall = (state: any) => state.main;
+export const selectAws = (state: any) => state.main.aws;

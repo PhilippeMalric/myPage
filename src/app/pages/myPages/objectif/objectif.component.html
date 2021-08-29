@@ -1,0 +1,58 @@
+
+
+
+<div class="maj" >
+    <button  mat-raised-button (click)="getObjectifs()" color="primary">Mettre à jour</button>
+</div>
+<div class="maj" >
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td class="cell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Value </th>
+        <td class="cell" mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td class="cell" mat-cell *matCellDef="let element"> 
+                <button color='warn' mat-raised-button (click)="deleteObjectif(element.id)">Delete</button> </td>
+        </ng-container>
+        
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<hr>
+<h1>
+    Ajoutez un objectif
+</h1>
+<form [formGroup]="objectifForm" (ngSubmit)="addObjectif()" novalidate class="myForm">
+ 
+    <div style="width: auto;">
+        <mat-form-field class="example-full-width" appearance="fill">
+        <label for="id">Id</label>
+        <input matInput type="text" id="id" name="id" formControlName="id">
+        </mat-form-field>
+    </div>
+    <div style="width: auto;">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <label for="secret">Description</label>
+            <input matInput type="text" id="description" name="description" formControlName="description">
+        </mat-form-field>
+    </div>
+   
+    <div style="width: auto;">
+        <button mat-raised-button color='accent' type="submit" [disabled]="!objectifForm.valid">Submit</button>
+    </div>
+</form>

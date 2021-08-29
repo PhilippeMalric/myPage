@@ -2,19 +2,23 @@
 <!--<button mat-raised-button (click)="test1()"> test1 </button>-->
 
 
-<form [formGroup]="awsForm" (ngSubmit)="onSubmit()" novalidate>
+<form [formGroup]="awsForm" (ngSubmit)="onSubmit()" novalidate class="myForm">
  
-    <p>
-      <label for="id">Aws id</label>
-      <input type="text" id="id" name="id" formControlName="id">
-    </p>
+    <div style="width: auto;">
+        <mat-form-field appearance="fill">
+            <label for="id">Aws id</label>
+            <input matInput type="text" id="id" name="id" formControlName="id">
+          </mat-form-field>
+    </div>
+    <div style="width: auto;">
+        <mat-form-field  appearance="fill">
+            <label for="secret">Password</label>
+            <input matInput type="text" id="secret" name="secret" formControlName="secret">
+        </mat-form-field>
+    </div>
 
-    <p>
-        <label for="secret">Password</label>
-        <input type="text" id="secret" name="secret" formControlName="secret">
-    </p>
-    <p>
-        <button type="submit" [disabled]="!awsForm.valid">Submit</button>
-    </p>
+    <div style="width: auto;">
+        <button mat-raised-button type="submit" [disabled]="!awsForm.valid">Submit</button>
+    </div>
 </form>
 

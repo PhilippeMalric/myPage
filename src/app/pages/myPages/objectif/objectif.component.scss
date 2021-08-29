@@ -1,0 +1,28 @@
+.myForm{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+}
+
+table {
+    width: 50%;
+  }
+
+.cell{
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+.maj{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

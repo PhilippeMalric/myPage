@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { config, DynamoDB }  from 'node_modules/aws-sdk';
 import { selectAws } from '../Ngrx/reducers';
@@ -9,13 +10,14 @@ import { selectAws } from '../Ngrx/reducers';
 })
 export class DataService {
 
-  constructor(private store:Store) { 
+  constructor(private store:Store,private router:Router) { 
    
     this.store.pipe(select(selectAws)).subscribe((data)=>{
       console.log("Inside service")
       console.log(data)
       if(data.aws_id != ""){
         this.connect(data.aws_id,data.aws_pw)
+        this.router.navigateByUrl("objectif")
       }
       
 

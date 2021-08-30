@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { selectAws } from 'src/app/Ngrx/reducers';
 import { DataService } from 'src/app/services/data.service';
 import { ObjectifService } from 'src/app/services/objectif.service';
 
@@ -14,13 +15,26 @@ export class ObjectifComponent implements OnInit {
   dataSource: any;
 
   displayedColumns: string[] = ['id', 'value',"delete"]
+  id_present: any;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private dataService:DataService,
     private objectifService:ObjectifService,
-    private store:Store) { }
+    private store:Store) { 
+
+      this.id_present = false
+
+      this.store.pipe(select(selectAws)).subscribe((data)=>{
+        console.log("Objectif component")
+        console.log(data)
+        if(data.aws_id!=""){
+          this.id_present = true
+          this.getObjectifs()
+        }
+      })
+    }
 
   ngOnInit(): void {
     this.objectifForm = this.formBuilder.group({

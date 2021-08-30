@@ -18,15 +18,21 @@ import { AppEffects } from './Ngrx/app.effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ObjectifComponent } from './pages/myPages/objectif/objectif.component';
 import {MatTableModule} from '@angular/material/table';
+import { NavComponent } from './pages/components/nav/nav.component';
+import {MatIconModule} from '@angular/material/icon';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FirstComponent,
     PageNotFoundComponent,
-    ObjectifComponent
+    ObjectifComponent,
+    NavComponent,
+    HomeComponent
   ],
   imports: [
+    MatIconModule,
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
